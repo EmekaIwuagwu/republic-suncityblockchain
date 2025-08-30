@@ -3,7 +3,7 @@ services:
   - type: web
     name: rsuncitychain-node
     runtime: docker
-    repo: https://github.com/yourusername/rsuncitychain.git
+    repo: https://github.com/EmekaIwuagwu/republic-suncityblockchain.git
     branch: main
     dockerfilePath: ./Dockerfile
     envVars:
