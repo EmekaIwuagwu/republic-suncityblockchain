@@ -1,0 +1,24 @@
+# render.yaml
+services:
+  - type: web
+    name: rsuncitychain-node
+    runtime: docker
+    repo: https://github.com/yourusername/rsuncitychain.git
+    branch: main
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: CHAIN_ID
+        value: rsuncitychain
+      - key: MONIKER
+        value: render-validator
+    disk:
+      name: blockchain-data
+      mountPath: /root/.rsuncitychain
+      sizeGB: 20
+    ports:
+      - port: 26657
+        protocol: tcp
+      - port: 1317
+        protocol: tcp
+      - port: 26656
+        protocol: tcp

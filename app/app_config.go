@@ -62,6 +62,18 @@ import (
 	_ "rsuncitychain/x/rsuncitychain/module"
 	rsuncitychainmoduletypes "rsuncitychain/x/rsuncitychain/types"
 
+	_ "rsuncitychain/x/landregistration/module"
+	landregistrationmoduletypes "rsuncitychain/x/landregistration/types"
+
+	_ "rsuncitychain/x/individualregistration/module"
+	individualregistrationmoduletypes "rsuncitychain/x/individualregistration/types"
+
+	_ "rsuncitychain/x/taxpayments/module"
+	taxpaymentsmoduletypes "rsuncitychain/x/taxpayments/types"
+
+	_ "rsuncitychain/x/evoting/module"
+	evotingmoduletypes "rsuncitychain/x/evoting/types"
+
 	"github.com/cosmos/cosmos-sdk/runtime"
 	_ "github.com/cosmos/cosmos-sdk/x/auth/tx/config" // import for side-effects
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
@@ -125,6 +137,10 @@ var (
 						ibcexported.ModuleName,
 						// chain modules
 						rsuncitychainmoduletypes.ModuleName,
+						landregistrationmoduletypes.ModuleName,
+						individualregistrationmoduletypes.ModuleName,
+						taxpaymentsmoduletypes.ModuleName,
+						evotingmoduletypes.ModuleName,
 						// this line is used by starport scaffolding # stargate/app/beginBlockers
 					},
 					EndBlockers: []string{
@@ -134,6 +150,10 @@ var (
 						group.ModuleName,
 						// chain modules
 						rsuncitychainmoduletypes.ModuleName,
+						landregistrationmoduletypes.ModuleName,
+						individualregistrationmoduletypes.ModuleName,
+						taxpaymentsmoduletypes.ModuleName,
+						evotingmoduletypes.ModuleName,
 						// this line is used by starport scaffolding # stargate/app/endBlockers
 					},
 					// The following is mostly only needed when ModuleName != StoreKey name.
@@ -170,6 +190,10 @@ var (
 						icatypes.ModuleName,
 						// chain modules
 						rsuncitychainmoduletypes.ModuleName,
+						landregistrationmoduletypes.ModuleName,
+						individualregistrationmoduletypes.ModuleName,
+						taxpaymentsmoduletypes.ModuleName,
+						evotingmoduletypes.ModuleName,
 						// this line is used by starport scaffolding # stargate/app/initGenesis
 					},
 				}),
@@ -264,6 +288,22 @@ var (
 			{
 				Name:   rsuncitychainmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&rsuncitychainmoduletypes.Module{}),
+			},
+			{
+				Name:   landregistrationmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&landregistrationmoduletypes.Module{}),
+			},
+			{
+				Name:   individualregistrationmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&individualregistrationmoduletypes.Module{}),
+			},
+			{
+				Name:   taxpaymentsmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&taxpaymentsmoduletypes.Module{}),
+			},
+			{
+				Name:   evotingmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&evotingmoduletypes.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

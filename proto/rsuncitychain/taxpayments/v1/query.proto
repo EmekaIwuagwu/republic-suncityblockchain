@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package rsuncitychain.taxpayments.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "rsuncitychain/taxpayments/v1/params.proto";
+import "rsuncitychain/taxpayments/v1/taxpayment.proto";
+
+option go_package = "rsuncitychain/x/taxpayments/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/rsuncitychain/taxpayments/v1/params";
+  
+  }
+  
+  // Queries a list of Taxpayment items.
+  rpc GetTaxpayment  (QueryGetTaxpaymentRequest) returns (QueryGetTaxpaymentResponse) {
+    option (google.api.http).get = "/rsuncitychain/taxpayments/taxpayment/{index}";
+  
+  }
+  rpc ListTaxpayment (QueryAllTaxpaymentRequest) returns (QueryAllTaxpaymentResponse) {
+    option (google.api.http).get = "/rsuncitychain/taxpayments/taxpayment";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetTaxpaymentRequest {
+  string index = 1;
+}
+
+message QueryGetTaxpaymentResponse {
+  Taxpayment taxpayment = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllTaxpaymentRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllTaxpaymentResponse {
+  repeated Taxpayment                             taxpayment = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

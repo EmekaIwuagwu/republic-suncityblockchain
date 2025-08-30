@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package rsuncitychain.evoting.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "rsuncitychain/evoting/v1/params.proto";
+import "rsuncitychain/evoting/v1/proposal.proto";
+import "rsuncitychain/evoting/v1/vote.proto";
+
+option go_package = "rsuncitychain/x/evoting/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/rsuncitychain/evoting/v1/params";
+  
+  }
+  
+  // Queries a list of Proposal items.
+  rpc GetProposal  (QueryGetProposalRequest) returns (QueryGetProposalResponse) {
+    option (google.api.http).get = "/rsuncitychain/evoting/proposal/{index}";
+  
+  }
+  rpc ListProposal (QueryAllProposalRequest) returns (QueryAllProposalResponse) {
+    option (google.api.http).get = "/rsuncitychain/evoting/proposal";
+  
+  }
+  
+  // Queries a list of Vote items.
+  rpc GetVote  (QueryGetVoteRequest) returns (QueryGetVoteResponse) {
+    option (google.api.http).get = "/rsuncitychain/evoting/vote/{index}";
+  
+  }
+  rpc ListVote (QueryAllVoteRequest) returns (QueryAllVoteResponse) {
+    option (google.api.http).get = "/rsuncitychain/evoting/vote";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetProposalRequest {
+  string index = 1;
+}
+
+message QueryGetProposalResponse {
+  Proposal proposal = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllProposalRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllProposalResponse {
+  repeated Proposal                               proposal   = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetVoteRequest {
+  string index = 1;
+}
+
+message QueryGetVoteResponse {
+  Vote vote = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllVoteRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllVoteResponse {
+  repeated Vote                                   vote       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

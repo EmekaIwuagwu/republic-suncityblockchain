@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package rsuncitychain.individualregistration.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "rsuncitychain/individualregistration/v1/params.proto";
+import "rsuncitychain/individualregistration/v1/individualrecord.proto";
+
+option go_package = "rsuncitychain/x/individualregistration/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/rsuncitychain/individualregistration/v1/params";
+  
+  }
+  
+  // Queries a list of Individualrecord items.
+  rpc GetIndividualrecord  (QueryGetIndividualrecordRequest) returns (QueryGetIndividualrecordResponse) {
+    option (google.api.http).get = "/rsuncitychain/individualregistration/individualrecord/{index}";
+  
+  }
+  rpc ListIndividualrecord (QueryAllIndividualrecordRequest) returns (QueryAllIndividualrecordResponse) {
+    option (google.api.http).get = "/rsuncitychain/individualregistration/individualrecord";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetIndividualrecordRequest {
+  string index = 1;
+}
+
+message QueryGetIndividualrecordResponse {
+  Individualrecord individualrecord = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllIndividualrecordRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllIndividualrecordResponse {
+  repeated Individualrecord                       individualrecord = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination       = 2;
+}
+

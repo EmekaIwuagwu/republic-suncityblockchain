@@ -1,0 +1,19 @@
+syntax = "proto3";
+package rsuncitychain.evoting.v1;
+
+option go_package = "rsuncitychain/x/evoting/types";
+
+message Proposal {
+  string index = 1; 
+  string proposalId = 2; 
+  string title = 3; 
+  string description = 4; 
+  string votingOptions = 5; 
+  string startTime = 6; 
+  string endTime = 7; 
+  string status = 8; 
+  string totalVotes = 9; 
+  string createdAt = 10; 
+  string creator = 11;
+}
+

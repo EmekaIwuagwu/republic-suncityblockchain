@@ -1,0 +1,15 @@
+syntax = "proto3";
+package rsuncitychain.individualregistration.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+
+option go_package = "rsuncitychain/x/individualregistration/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (amino.name) = "rsuncitychain/x/individualregistration/Params";
+  option (gogoproto.equal) = true;
+
+  
+}

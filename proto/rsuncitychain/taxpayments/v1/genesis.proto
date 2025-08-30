@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package rsuncitychain.taxpayments.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "rsuncitychain/taxpayments/v1/params.proto";
+import "rsuncitychain/taxpayments/v1/taxpayment.proto";
+
+option go_package = "rsuncitychain/x/taxpayments/types";
+
+// GenesisState defines the taxpayments module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params     params         = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Taxpayment taxpaymentList = 2 [(gogoproto.nullable) = false] ;
+}
+

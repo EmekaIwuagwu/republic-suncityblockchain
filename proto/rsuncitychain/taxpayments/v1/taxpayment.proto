@@ -1,0 +1,17 @@
+syntax = "proto3";
+package rsuncitychain.taxpayments.v1;
+
+option go_package = "rsuncitychain/x/taxpayments/types";
+
+message Taxpayment {
+  string index = 1; 
+  string receiptNumber = 2; 
+  string paymentFromAddress = 3; 
+  string paymenttoAddress = 4; 
+  string amount = 5; 
+  string dateOfPayment = 6; 
+  string tx = 7; 
+  string createdAt = 8; 
+  string creator = 9;
+}
+

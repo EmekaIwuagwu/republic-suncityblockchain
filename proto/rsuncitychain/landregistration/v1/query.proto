@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package rsuncitychain.landregistration.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "rsuncitychain/landregistration/v1/params.proto";
+import "rsuncitychain/landregistration/v1/landrecord.proto";
+
+option go_package = "rsuncitychain/x/landregistration/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  
+  // Parameters queries the parameters of the module.
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/rsuncitychain/landregistration/v1/params";
+  
+  }
+  
+  // Queries a list of Landrecord items.
+  rpc GetLandrecord  (QueryGetLandrecordRequest) returns (QueryGetLandrecordResponse) {
+    option (google.api.http).get = "/rsuncitychain/landregistration/landrecord/{index}";
+  
+  }
+  rpc ListLandrecord (QueryAllLandrecordRequest) returns (QueryAllLandrecordResponse) {
+    option (google.api.http).get = "/rsuncitychain/landregistration/landrecord";
+  
+  }
+}
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+}
+
+message QueryGetLandrecordRequest {
+  string index = 1;
+}
+
+message QueryGetLandrecordResponse {
+  Landrecord landrecord = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllLandrecordRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllLandrecordResponse {
+  repeated Landrecord                             landrecord = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+

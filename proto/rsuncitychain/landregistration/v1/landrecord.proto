@@ -1,0 +1,20 @@
+syntax = "proto3";
+package rsuncitychain.landregistration.v1;
+
+option go_package = "rsuncitychain/x/landregistration/types";
+
+message Landrecord {
+  string index = 1; 
+  string landRegNum = 2; 
+  string ownerAddress = 3; 
+  string landLocationAddress = 4; 
+  string landOwnerName = 5; 
+  string dateofLandPurchase = 6; 
+  string nameOfPreviousOwner = 7; 
+  string landOwnerTel = 8; 
+  string landOwnerEmail = 9; 
+  string tx = 10; 
+  string createdAt = 11; 
+  string creator = 12;
+}
+

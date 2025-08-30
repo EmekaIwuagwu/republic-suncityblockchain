@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package rsuncitychain.landregistration.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "rsuncitychain/landregistration/v1/params.proto";
+import "rsuncitychain/landregistration/v1/landrecord.proto";
+
+option go_package = "rsuncitychain/x/landregistration/types";
+
+// GenesisState defines the landregistration module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params     params         = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Landrecord landrecordList = 2 [(gogoproto.nullable) = false] ;
+}
+

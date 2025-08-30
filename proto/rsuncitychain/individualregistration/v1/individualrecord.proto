@@ -1,0 +1,19 @@
+syntax = "proto3";
+package rsuncitychain.individualregistration.v1;
+
+option go_package = "rsuncitychain/x/individualregistration/types";
+
+message Individualrecord {
+  string index = 1; 
+  string personalRegnum = 2; 
+  string ownerAddress = 3; 
+  string locationAddress = 4; 
+  string dateOfBirth = 5; 
+  string gender = 6; 
+  string email = 7; 
+  string tx = 8; 
+  string telephone = 9; 
+  string createdAt = 10; 
+  string creator = 11;
+}
+

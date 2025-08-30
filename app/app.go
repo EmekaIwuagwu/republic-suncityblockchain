@@ -45,12 +45,15 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v10/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v10/modules/core/keeper"
 
-	"rsuncitychain/docs"
+	evotingmodulekeeper "rsuncitychain/x/evoting/keeper"
+	individualregistrationmodulekeeper "rsuncitychain/x/individualregistration/keeper"
+	landregistrationmodulekeeper "rsuncitychain/x/landregistration/keeper"
 	rsuncitychainmodulekeeper "rsuncitychain/x/rsuncitychain/keeper"
+	taxpaymentsmodulekeeper "rsuncitychain/x/taxpayments/keeper"
 )
 
 const (
-	AccountAddressPrefix = "cosmos"
+	AccountAddressPrefix = "sunc"
 	Name                 = "rsuncitychain"
 )
 
@@ -94,7 +97,11 @@ type App struct {
 	ICAHostKeeper       icahostkeeper.Keeper
 	TransferKeeper      ibctransferkeeper.Keeper
 
-	RsuncitychainKeeper rsuncitychainmodulekeeper.Keeper
+	RsuncitychainKeeper          rsuncitychainmodulekeeper.Keeper
+	LandregistrationKeeper       landregistrationmodulekeeper.Keeper
+	IndividualregistrationKeeper individualregistrationmodulekeeper.Keeper
+	TaxpaymentsKeeper            taxpaymentsmodulekeeper.Keeper
+	EvotingKeeper                evotingmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -172,6 +179,10 @@ func New(
 		&app.CircuitBreakerKeeper,
 		&app.ParamsKeeper,
 		&app.RsuncitychainKeeper,
+		&app.LandregistrationKeeper,
+		&app.IndividualregistrationKeeper,
+		&app.TaxpaymentsKeeper,
+		&app.EvotingKeeper,
 	); err != nil {
 		panic(err)
 	}
@@ -264,9 +275,6 @@ func (app *App) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig
 	if err := server.RegisterSwaggerAPI(apiSvr.ClientCtx, apiSvr.Router, apiConfig.Swagger); err != nil {
 		panic(err)
 	}
-
-	// register app's OpenAPI routes.
-	docs.RegisterOpenAPIService(Name, apiSvr.Router)
 }
 
 // GetMaccPerms returns a copy of the module account permissions

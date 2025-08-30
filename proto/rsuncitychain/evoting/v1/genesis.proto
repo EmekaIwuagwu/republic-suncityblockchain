@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package rsuncitychain.evoting.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "rsuncitychain/evoting/v1/params.proto";
+import "rsuncitychain/evoting/v1/proposal.proto";
+import "rsuncitychain/evoting/v1/vote.proto";
+
+option go_package = "rsuncitychain/x/evoting/types";
+
+// GenesisState defines the evoting module's genesis state.
+message GenesisState {
+  
+  // params defines all the parameters of the module.
+           Params   params       = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  repeated Proposal proposalList = 2 [(gogoproto.nullable) = false] ;
+  repeated Vote     voteList     = 3 [(gogoproto.nullable) = false] ;
+}
+
